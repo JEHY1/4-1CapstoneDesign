@@ -1,31 +1,33 @@
-import pymysql
+import sys
+from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QVBoxLayout, QLineEdit, QPushButton
 
-# MySQL 데이터베이스에 접속
-connection = pymysql.connect(
-    host='localhost',
-    user='root',
-    password='12345',
-    db='Kiosk',
-    charset='utf8'
-)
+class TextInputWindow(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.initUI()
 
-# 커서 생성
-cursor = connection.cursor()
+    def initUI(self):
+        self.setWindowTitle('텍스트 입력 예제')
+        layout = QVBoxLayout()
 
-# SELECT 쿼리 실행
-query = "SELECT Product_name, Product_price, Product_Place FROM product_tbl WHERE Product_Category = '주방용품';"
-cursor.execute(query)
+        self.label = QLabel("입력된 텍스트:")
+        layout.addWidget(self.label)
 
-# 결과를 담을 리스트 생성
-data_list = []
+        self.text_input = QLineEdit()
+        layout.addWidget(self.text_input)
 
-# 쿼리 결과를 리스트에 추가
-for row in cursor.fetchall():
-    data_list.append(list(row))
+        button = QPushButton('입력')
+        button.clicked.connect(self.handle_button_click)
+        layout.addWidget(button)
 
-# 연결 종료
-cursor.close()
-connection.close()
+        self.setLayout(layout)
 
-# 결과 출력
-print(data_list)
+    def handle_button_click(self):
+        text = self.text_input.text()
+        self.label.setText("입력된 텍스트: " + text)
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    window = TextInputWindow()
+    window.show()
+    sys.exit(app.exec_())

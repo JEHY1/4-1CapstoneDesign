@@ -4,6 +4,7 @@ from PyQt5 import uic
 from PyQt5.QtGui import *
 
 class Car_Manager_mode(QWidget):
+    
     def __init__(self):
         super().__init__()
         uic.loadUi('Manager_mode.ui', self)
