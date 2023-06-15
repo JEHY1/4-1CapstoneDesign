@@ -1,5 +1,6 @@
 import sys
 from kitchen import Car_Kitchen
+from Manager_login import Car_Manager_login
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 from PyQt5.QtGui import *
@@ -14,18 +15,29 @@ class Main(QWidget):
         self.setWindowTitle('키오스크')
         self.Btn_Category1.clicked.connect(self.btn_CategoryClicked) # 1번 버튼
         self.Btn_Category2.clicked.connect(self.btn_CategoryClicked) # 2번 버튼, 향후 추가 예정
+        self.Btn_Admin.clicked.connect(self.btn_AdminClicked)
 
     # 버튼을 눌렀을때, 창 변환
     def btn_CategoryClicked(self):
         #result = QMessageBox()
         #qmsBox = result.question(result,"주방용품!","주방용품입니다.")
         print(self.sender().objectName())
-        
-        if self.Btn_Category1.clicked.connect(self.btn_CategoryClicked):
-             print("주방용품")
-             self.Carkitchen = Car_Kitchen()
-             self.Carkitchen.show()
-             self.close()
+        print("주방용품")
+        self.Carkitchen = Car_Kitchen()
+        self.Carkitchen.show()
+        self.close()
+
+    def btn_AdminClicked(self):
+        print(self.sender().objectName())
+        if self.Btn_Admin.clicked.connect(self.btn_AdminClicked):
+            print("관리자 모드")
+           
+            self.Carmanager_login = Car_Manager_login()
+            self.Carmanager_login.show()
+            self.close()
+
+    
+
 
 # 위젯 실행
 if __name__ == '__main__':

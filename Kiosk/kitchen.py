@@ -15,13 +15,13 @@ class Car_Kitchen(QWidget):
         connection = pymysql.connect(
         host='localhost',
         user='root',
-        password='12345',
+        password='qwe123',
         db='Kiosk',
         charset='utf8'
         )
 
         cursor = connection.cursor()
-        query = "SELECT Product_name, Product_price, Product_Place FROM product_tbl WHERE Product_Category = '주방용품';"
+        query = "SELECT Product_name, Product_price, Product_Place FROM Product_tbl WHERE Product_Category = '주방용품';"
         cursor.execute(query)
 
         # 결과를 담을 리스트 생성
