@@ -7,7 +7,6 @@ class KeyBlocker(QWidget):
         super().__init__()
 
         self.blocked_keys = set()  # 차단된 키 목록
-        self.ctrl_key_blocked = False  # 좌측 Ctrl 키 차단 상태
 
         self.initUI()
 
