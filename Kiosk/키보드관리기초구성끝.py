@@ -43,7 +43,7 @@ class KioskApp:
             self.blocker.stopBlock('LWin')
             self.win_button["text"] = "Block Windows Key"
         else:
-            self.blocker.startBlock('block_win_keys.ahk', 'LWin')
+            self.blocker.startBlock('block_Lwin_keys.ahk', 'LWin')
             self.win_button["text"] = "Unblock Windows Key"
 
     def toggleBlockF4Key(self):

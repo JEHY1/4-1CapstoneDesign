@@ -19,7 +19,7 @@ class Car_Manager_login(QWidget):
         user='root',
         password='qwe123',
         db='Kiosk',
-        charset='utf8'
+        charset='utf8',
         )
 
         cursor = connection.cursor()

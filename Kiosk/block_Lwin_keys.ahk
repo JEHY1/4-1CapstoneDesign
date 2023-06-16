@@ -1,4 +1,4 @@
 #SingleInstance force
 
-a::
+LWin::
 return
