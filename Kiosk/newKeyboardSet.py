@@ -2,6 +2,7 @@ import subprocess
 import pymysql
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton
 
+
 class KeyBlocker:
     def __init__(self):
         self.processes = {}
@@ -68,6 +69,10 @@ class KioskApp(QWidget):
         layout.addWidget(self.unblock_button)
         self.unblock_button.clicked.connect(self.unblockAllKeys)
 
+        self.back_button = QPushButton("Back")
+        layout.addWidget(self.back_button)
+        self.back_button.clicked.connect(self.back_clicked)
+
         self.loadButtonStatus()
 
     def toggleBlockWinKey(self):
@@ -75,29 +80,36 @@ class KioskApp(QWidget):
             self.blocker.stopBlock('LWin')
             self.blocker.updateDatabaseBlockStatus('LWin', 0)
             self.win_button.setText("Block Windows Key")
+            self.win_button.setStyleSheet("")
         else:
             self.blocker.startBlock('block_Lwin_keys.ahk', 'LWin')
             self.blocker.updateDatabaseBlockStatus('LWin', 1)
             self.win_button.setText("Unblock Windows Key")
+            self.win_button.setStyleSheet("background-color: #888888; color: white;")
 
     def toggleBlockF4Key(self):
         if self.blocker.isBlocked('F4'):
             self.blocker.stopBlock('F4')
             self.blocker.updateDatabaseBlockStatus('F4', 0)
             self.f4_button.setText("Block F4 Key")
+            self.f4_button.setStyleSheet("")
         else:
             self.blocker.startBlock('block_f4_key.ahk', 'F4')
             self.blocker.updateDatabaseBlockStatus('F4', 1)
             self.f4_button.setText("Unblock F4 Key")
+            self.f4_button.setStyleSheet("background-color: #888888; color: white;")
 
     def unblockAllKeys(self):
         self.blocker.stopBlock('LWin')
         self.blocker.updateDatabaseBlockStatus('LWin', 0)
         self.win_button.setText("Block Windows Key")
+        self.win_button.setStyleSheet("")
 
         self.blocker.stopBlock('F4')
         self.blocker.updateDatabaseBlockStatus('F4', 0)
         self.f4_button.setText("Block F4 Key")
+        self.f4_button.setStyleSheet("")
+
 
     def loadButtonStatus(self):
         blocked_win = self.blocker.getBlockStatusFromDatabase('LWin')
@@ -106,17 +118,26 @@ class KioskApp(QWidget):
         if blocked_win:
             self.blocker.startBlock('block_Lwin_keys.ahk', 'LWin')
             self.win_button.setText("Unblock Windows Key")
+            self.win_button.setStyleSheet("background-color: #888888; color: white;")
         else:
             self.win_button.setText("Block Windows Key")
 
         if blocked_f4:
             self.blocker.startBlock('block_f4_key.ahk', 'F4')
             self.f4_button.setText("Unblock F4 Key")
+            self.f4_button.setStyleSheet("background-color: #888888; color: white;")
         else:
             self.f4_button.setText("Block F4 Key")
+
+    def back_clicked(self):
+        from Manager_mode import Car_Manager_mode
+        self.Carmanager_mode = Car_Manager_mode()
+        self.Carmanager_mode.showFullScreen()
+        self.close()
 
 if __name__ == "__main__":
     app = QApplication([])
     window = KioskApp()
-    window.show()
+    window.showFullScreen()
     app.exec()
+

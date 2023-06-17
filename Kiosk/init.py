@@ -24,7 +24,7 @@ class Main(QWidget):
         print(self.sender().objectName())
         print("주방용품")
         self.Carkitchen = Car_Kitchen()
-        self.Carkitchen.show()
+        self.Carkitchen.showFullScreen()
         self.close()
 
     def btn_AdminClicked(self):
@@ -33,7 +33,7 @@ class Main(QWidget):
             print("관리자 모드")
            
             self.Carmanager_login = Car_Manager_login()
-            self.Carmanager_login.show()
+            self.Carmanager_login.showFullScreen()
             self.close()
 
     
@@ -43,5 +43,5 @@ class Main(QWidget):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     Main_Widget = Main()
-    Main_Widget.show()
+    Main_Widget.showFullScreen()
     sys.exit(app.exec_())

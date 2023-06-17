@@ -26,7 +26,7 @@
     <string>키보드 입력 관리</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="btn_changePassword">
    <property name="geometry">
     <rect>
      <x>230</x>
@@ -37,6 +37,32 @@
    </property>
    <property name="text">
     <string>비밀번호 변경</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_quit">
+   <property name="geometry">
+    <rect>
+     <x>304</x>
+     <y>10</y>
+     <width>91</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>키오스크종료</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_back">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>230</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>나가기</string>
    </property>
   </widget>
  </widget>

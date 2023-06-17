@@ -43,8 +43,8 @@ class Car_Manager_login(QWidget):
             print("관리자 모드")
             print("entered pw:")
             print(self.entered_pw.text())
-            self.Carmanager_mode = Car_Manager_mode()
-            self.Carmanager_mode.show()
+            self.Carmanager_login = Car_Manager_mode()
+            self.Carmanager_login.showFullScreen()
             self.close()
     
         
