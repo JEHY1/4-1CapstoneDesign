@@ -6,11 +6,11 @@ from Manager_mode import Car_Manager_mode
 
 class Car_Manager_login(QWidget):
     
-
     def __init__(self):
         super().__init__()
-        uic.loadUi('Manager_login.ui', self)
+        uic.loadUi('./ui/Manager_login.ui', self)
         self.setWindowTitle('로그인')
+        #버튼과 함수 연결
         self.btn_login.clicked.connect(self.btn_LoginClicked)
 
         #DB 연결
@@ -27,7 +27,7 @@ class Car_Manager_login(QWidget):
         cursor.execute(query)
         global admin_data
         admin_data = cursor.fetchone()
-        admin_data = admin_data[0]
+        admin_data = admin_data[0] #admin_data에 데이터베이스의 관리자 비밀번호 저장
         print("admin data is ")
         print(admin_data)
 
@@ -35,24 +35,8 @@ class Car_Manager_login(QWidget):
         cursor.close()
         connection.close()
     
-
-
     def btn_LoginClicked(self):
-        print(self.sender().objectName())
-        if admin_data == self.entered_pw.text():
-            print("관리자 모드")
-            print("entered pw:")
-            print(self.entered_pw.text())
-            self.Carmanager_login = Car_Manager_mode()
+        if admin_data == self.entered_pw.text(): #.text() 로 해당 텍스트 박스의 값을 가져와서 db의 값과 일치하는지 비교
+            self.Carmanager_login = Car_Manager_mode() 
             self.Carmanager_login.showFullScreen()
             self.close()
-    
-        
-            
-                
-
-
-
-
-
-        

@@ -3,13 +3,13 @@ from PyQt5.QtWidgets import *
 from PyQt5 import uic
 from PyQt5.QtGui import *
 
-
 class Car_changePassword(QWidget):
     
     def __init__(self):
         super().__init__()
-        uic.loadUi('Change_Password.ui', self)
+        uic.loadUi('./ui/Change_Password.ui', self)
         self.setWindowTitle('비밀번호 변경')
+        #버튼과 함수 연결
         self.btn_change.clicked.connect(self.btn_changePasswordClicked)
         self.btn_cancel.clicked.connect(self.btn_cancelClicked)
 

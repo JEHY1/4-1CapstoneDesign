@@ -10,7 +10,7 @@ class Main(QWidget):
 
     def __init__(self):
         super().__init__()
-        uic.loadUi('./Main.ui', self)
+        uic.loadUi('./ui/Main.ui', self)
         # self.setWindowIcon(QIcon('~.png')) // 아이콘 등록
         self.setWindowTitle('키오스크')
         self.Btn_Category1.clicked.connect(self.btn_CategoryClicked) # 1번 버튼

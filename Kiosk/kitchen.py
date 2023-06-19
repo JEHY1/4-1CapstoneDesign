@@ -7,7 +7,7 @@ from PyQt5.QtGui import *
 class Car_Kitchen(QWidget):
     def __init__(self):
         super().__init__()
-        uic.loadUi('Kitchen.ui', self)
+        uic.loadUi('./ui/Kitchen.ui', self)
         # self.setWindowIcon(QIcon('~.png')) // 아이콘 등록
         self.setWindowTitle('키오스크')
 
