@@ -61,9 +61,13 @@ class KioskApp(QWidget):
         layout.addWidget(self.win_button)
         self.win_button.clicked.connect(self.toggleBlockWinKey)
 
-        self.f4_button = QPushButton("Block F4 Key")
-        layout.addWidget(self.f4_button)
-        self.f4_button.clicked.connect(self.toggleBlockF4Key)
+        self.altf4_button = QPushButton("Block Alt+F4 Key")
+        layout.addWidget(self.altf4_button)
+        self.altf4_button.clicked.connect(self.toggleBlockAltF4Key)
+
+        self.alt_button = QPushButton("Block Alt Key")
+        layout.addWidget(self.alt_button)
+        self.alt_button.clicked.connect(self.toggleBlockAltKey)
 
         self.unblock_button = QPushButton("Unblock All Keys")
         layout.addWidget(self.unblock_button)
@@ -87,17 +91,29 @@ class KioskApp(QWidget):
             self.win_button.setText("Unblock Windows Key")
             self.win_button.setStyleSheet("background-color: #888888; color: white;")
 
-    def toggleBlockF4Key(self):
-        if self.blocker.isBlocked('F4'):
-            self.blocker.stopBlock('F4')
-            self.blocker.updateDatabaseBlockStatus('F4', 0)
-            self.f4_button.setText("Block F4 Key")
-            self.f4_button.setStyleSheet("")
+    def toggleBlockAltF4Key(self):
+        if self.blocker.isBlocked('Alt+F4'):
+            self.blocker.stopBlock('Alt+F4')
+            self.blocker.updateDatabaseBlockStatus('Alt+F4', 0)
+            self.altf4_button.setText("Block Alt+F4 Key")
+            self.altf4_button.setStyleSheet("")
         else:
-            self.blocker.startBlock('block_f4_key.ahk', 'F4')
-            self.blocker.updateDatabaseBlockStatus('F4', 1)
-            self.f4_button.setText("Unblock F4 Key")
-            self.f4_button.setStyleSheet("background-color: #888888; color: white;")
+            self.blocker.startBlock('block_alt+f4_key.ahk', 'Alt+F4')
+            self.blocker.updateDatabaseBlockStatus('Alt+F4', 1)
+            self.altf4_button.setText("Unblock Alt+F4 Key")
+            self.altf4_button.setStyleSheet("background-color: #888888; color: white;")
+
+    def toggleBlockAltKey(self):
+        if self.blocker.isBlocked('Alt'):
+            self.blocker.stopBlock('Alt')
+            self.blocker.updateDatabaseBlockStatus('Alt', 0)
+            self.alt_button.setText("Block Alt Key")
+            self.alt_button.setStyleSheet("")
+        else:
+            self.blocker.startBlock('block_Alt_key.ahk', 'Alt')
+            self.blocker.updateDatabaseBlockStatus('Alt', 1)
+            self.alt_button.setText("Unblock Alt Key")
+            self.alt_button.setStyleSheet("background-color: #888888; color: white;")
 
     def unblockAllKeys(self):
         self.blocker.stopBlock('LWin')
@@ -105,15 +121,21 @@ class KioskApp(QWidget):
         self.win_button.setText("Block Windows Key")
         self.win_button.setStyleSheet("")
 
-        self.blocker.stopBlock('F4')
-        self.blocker.updateDatabaseBlockStatus('F4', 0)
-        self.f4_button.setText("Block F4 Key")
-        self.f4_button.setStyleSheet("")
+        self.blocker.stopBlock('Alt+F4')
+        self.blocker.updateDatabaseBlockStatus('Alt+F4', 0)
+        self.altf4_button.setText("Block Alt+F4 Key")
+        self.altf4_button.setStyleSheet("")
+
+        self.blocker.stopBlock('Alt')
+        self.blocker.updateDatabaseBlockStatus('Alt', 0)
+        self.alt_button.setText("Block Alt Key")
+        self.alt_button.setStyleSheet("")
 
 
     def loadButtonStatus(self):
         blocked_win = self.blocker.getBlockStatusFromDatabase('LWin')
-        blocked_f4 = self.blocker.getBlockStatusFromDatabase('F4')
+        blocked_altf4 = self.blocker.getBlockStatusFromDatabase('Alt+F4')
+        blocked_alt = self.blocker.getBlockStatusFromDatabase('Alt')
 
         if blocked_win:
             self.blocker.startBlock('block_Lwin_keys.ahk', 'LWin')
@@ -122,12 +144,19 @@ class KioskApp(QWidget):
         else:
             self.win_button.setText("Block Windows Key")
 
-        if blocked_f4:
-            self.blocker.startBlock('block_f4_key.ahk', 'F4')
-            self.f4_button.setText("Unblock F4 Key")
-            self.f4_button.setStyleSheet("background-color: #888888; color: white;")
+        if blocked_altf4:
+            self.blocker.startBlock('block_alt+f4_key.ahk', 'Alt+F4')
+            self.altf4_button.setText("Unblock Alt+F4 Key")
+            self.altf4_button.setStyleSheet("background-color: #888888; color: white;")
         else:
-            self.f4_button.setText("Block F4 Key")
+            self.altf4_button.setText("Block Alt+F4 Key")
+
+        if blocked_alt:
+            self.blocker.startBlock('block_Alt_key.ahk', 'Alt')
+            self.alt_button.setText("Unblock Alt Key")
+            self.alt_button.setStyleSheet("background-color: #888888; color: white;")
+        else:
+            self.alt_button.setText("Block Alt Key")
 
     def back_clicked(self):
         from Manager_mode import Car_Manager_mode
